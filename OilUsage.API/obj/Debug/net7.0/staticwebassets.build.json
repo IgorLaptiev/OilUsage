@@ -1,0 +1,23 @@
+{
+  "Version": 1,
+  "Hash": "oA534eEQm0KW+7Hu0A7WnZHgPCeRNHqC86bFG908m88=",
+  "Source": "OilUsage.API",
+  "BasePath": "_content/OilUsage.API",
+  "Mode": "Default",
+  "ManifestType": "Build",
+  "ReferencedProjectsConfiguration": [
+    {
+      "Identity": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj",
+      "Version": 2,
+      "Source": "OilUsage.Data",
+      "GetPublishAssetsTargets": "ComputeReferencedStaticWebAssetsPublishManifest;GetCurrentProjectPublishStaticWebAssetItems",
+      "AdditionalPublishProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalPublishPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained",
+      "GetBuildAssetsTargets": "GetCurrentProjectBuildStaticWebAssetItems",
+      "AdditionalBuildProperties": "Configuration=Debug;Platform=AnyCPU",
+      "AdditionalBuildPropertiesToRemove": "WebPublishProfileFile;TargetFramework;RuntimeIdentifier;SelfContained"
+    }
+  ],
+  "DiscoveryPatterns": [],
+  "Assets": []
+}
