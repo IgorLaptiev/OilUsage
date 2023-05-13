@@ -28,7 +28,7 @@ public partial class OildbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL("server=database-2.ckqufcaqegte.us-east-1.rds.amazonaws.com;port=3306;database=oildb;uid=;password=");
+        optionsBuilder.UseMySQL("server=database-2.ckqufcaqegte.us-east-1.rds.amazonaws.com;port=3306;database=oildb;uid=admin;password=SAPassword");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)

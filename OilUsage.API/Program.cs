@@ -1,8 +1,10 @@
 ﻿using OilUsage.Data;
 using OilUsage.Domain;
+using Amazon.Lambda;
 
 var builder = WebApplication.CreateBuilder(args);
 
+builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
 builder.Services.AddDbContext<OildbContext>();
 builder.Services.AddTransient<IOilUsageService, OilUsageService>();
