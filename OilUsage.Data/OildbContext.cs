@@ -28,7 +28,7 @@ public partial class OildbContext : DbContext
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
     {
-        optionsBuilder.UseMySQL("server=database-2.ckqufcaqegte.us-east-1.rds.amazonaws.com;port=3306;database=oildb;uid=admin;password=SAPassword");
+        optionsBuilder.UseMySQL("server=localhost;port=3306;database=oildb;uid=root;password=SAPassword");
     }
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -86,8 +86,6 @@ public partial class OildbContext : DbContext
             entity.HasIndex(e => e.UsageTypeId, "FK_Usage_UsageType_idx");
 
             entity.HasIndex(e => e.UsageId, "UsageId_UNIQUE").IsUnique();
-
-            entity.Property(e => e.Usagecol).HasMaxLength(45);
 
             entity.HasOne(d => d.Issue).WithMany(p => p.Usages)
                 .HasForeignKey(d => d.IssueId)
