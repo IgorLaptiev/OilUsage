@@ -5,6 +5,17 @@ bin
 obj
 packages
 
+obj/
 **/bin/**
 **/obj/**
 .vs
+# IDEs
+.idea/
+jsconfig.json
+.vscode
+*.xcuserstate
+
+# idea
+.idea
+
+/**/obj/**

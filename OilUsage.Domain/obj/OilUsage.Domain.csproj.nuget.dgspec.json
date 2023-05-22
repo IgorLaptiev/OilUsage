@@ -1,25 +1,27 @@
 {
   "format": 1,
   "restore": {
-    "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Domain/OilUsage.Domain.csproj": {}
+    "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\OilUsage.Domain.csproj": {}
   },
   "projects": {
-    "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj": {
+    "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj",
+        "projectUniqueName": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj",
         "projectName": "OilUsage.Data",
-        "projectPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj",
-        "packagesPath": "/Users/igorlaptiev/.nuget/packages/",
-        "outputPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/obj/",
+        "projectPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj",
+        "packagesPath": "C:\\Users\\ilaptiev\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/igorlaptiev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ilaptiev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -62,39 +64,36 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     },
-    "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Domain/OilUsage.Domain.csproj": {
+    "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\OilUsage.Domain.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Domain/OilUsage.Domain.csproj",
+        "projectUniqueName": "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\OilUsage.Domain.csproj",
         "projectName": "OilUsage.Domain",
-        "projectPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Domain/OilUsage.Domain.csproj",
-        "packagesPath": "/Users/igorlaptiev/.nuget/packages/",
-        "outputPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Domain/obj/",
+        "projectPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\OilUsage.Domain.csproj",
+        "packagesPath": "C:\\Users\\ilaptiev\\.nuget\\packages\\",
+        "outputPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\obj\\",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "/Users/igorlaptiev/.nuget/NuGet/NuGet.Config"
+          "C:\\Users\\ilaptiev\\AppData\\Roaming\\NuGet\\NuGet.Config",
+          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
+          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
           "net6.0": {
             "targetAlias": "net6.0",
             "projectReferences": {
-              "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj": {
-                "projectPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj"
+              "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj": {
+                "projectPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj"
               }
             }
           }
@@ -124,12 +123,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
-        }
-      },
-      "runtimes": {
-        "linux-x64": {
-          "#import": []
+          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
         }
       }
     }
