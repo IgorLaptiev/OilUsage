@@ -3,7 +3,7 @@
     public class IssueDto
     {
 
-        public int IssueId { get; set; }
+        public Guid IssueGuid { get; set; }
 
         public string? Name { get; set; }
     }

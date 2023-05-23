@@ -7,7 +7,7 @@ namespace OilUsage.Data.Entity;
 
 public partial class Issue
 {
-    public string PK => $"ISSUE#{IssueGuid}";
+    public string PK => $"ISSUE#";
 
     public string SK => $"ISSUE#{IssueGuid}";
 

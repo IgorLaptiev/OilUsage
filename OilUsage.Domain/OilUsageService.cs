@@ -21,7 +21,7 @@ namespace OilUsage.Domain
             return await _oilDbContext.Issues.Select(o => new IssueDto
             {
                 Name = o.Name,
-                IssueId = o.IssueId
+                IssueGuid = o.IssueGuid!.Value
             }).ToListAsync();
         }
 

@@ -6,7 +6,7 @@ namespace OilUsage.Data.Entity;
 
 public partial class Oil
 { 
-    public string PK => $"OIL#{OilGuid}";
+    public string PK => $"OIL#";
 
     public string SK => $"OIL#{OilGuid}";
 

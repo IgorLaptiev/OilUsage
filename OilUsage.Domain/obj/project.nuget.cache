@@ -1,9 +1,11 @@
 {
   "version": 2,
-  "dgSpecHash": "YzxqK4bm93RQyQYzy/fUgxV34QG645LPncj3LyYYcqz/yeQP7avKeWeta3eZoRfm9tby09b36M9jKp4vEPQLJg==",
+  "dgSpecHash": "9/owQVC4Y+j9ohaye8kEswPHDiAftQZF7MLRWOURoUQON4WYo3WV2bac2KPLP8p+9z8Y2ONjhP/T0taAttwFNg==",
   "success": true,
   "projectFilePath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Domain\\OilUsage.Domain.csproj",
   "expectedPackageFiles": [
+    "C:\\Users\\ilaptiev\\.nuget\\packages\\awssdk.core\\3.7.106.39\\awssdk.core.3.7.106.39.nupkg.sha512",
+    "C:\\Users\\ilaptiev\\.nuget\\packages\\awssdk.dynamodbv2\\3.7.103.8\\awssdk.dynamodbv2.3.7.103.8.nupkg.sha512",
     "C:\\Users\\ilaptiev\\.nuget\\packages\\google.protobuf\\3.21.9\\google.protobuf.3.21.9.nupkg.sha512",
     "C:\\Users\\ilaptiev\\.nuget\\packages\\k4os.compression.lz4\\1.3.5\\k4os.compression.lz4.1.3.5.nupkg.sha512",
     "C:\\Users\\ilaptiev\\.nuget\\packages\\k4os.compression.lz4.streams\\1.3.5\\k4os.compression.lz4.streams.1.3.5.nupkg.sha512",
