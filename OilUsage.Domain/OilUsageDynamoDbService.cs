@@ -1,3 +1,4 @@
+using System.Diagnostics;
 using System.Text.Json;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
@@ -21,6 +22,17 @@ public class OilUsageDynamoDbService : IOilUsageService
     
     public async Task<List<IssueDto>> GetIssuesAsync()
     {
+        return await Query<IssueDto>(GetKeyAttributeValue<IssueDto>());
+    }
+
+    public async Task<List<OilDto>> GetOilsAsync()
+    {
+        return await Query<OilDto>(GetKeyAttributeValue<OilDto>());
+    }
+
+
+    private async Task<List<T>> Query<T>(AttributeValue? keyValue) where T : class
+    {
         var query = new QueryRequest()
         {
             TableName = _databaseSettings.Value.TableName,
@@ -31,7 +43,7 @@ public class OilUsageDynamoDbService : IOilUsageService
                     new Condition()
                     {
                         ComparisonOperator = ComparisonOperator.EQ,
-                        AttributeValueList = new List<AttributeValue>() { new("ISSUE#") }
+                        AttributeValueList = new List<AttributeValue?>() { keyValue }
                     }
                 }
             },
@@ -39,17 +51,28 @@ public class OilUsageDynamoDbService : IOilUsageService
         var result = await _dbClient.QueryAsync(query);
         return result.Items
             .Select(issue =>
-                {
-                    var issueSerialized = Document.FromAttributeMap(issue);
-                    return JsonSerializer.Deserialize<IssueDto>(issueSerialized.ToJson());
-                })
-            .Where(dto => dto !=null)
+            {
+                var issueSerialized = Document.FromAttributeMap(issue);
+                return JsonSerializer.Deserialize<T>(issueSerialized.ToJson());
+            })
+            .Where(dto => dto != null)
             .ToList()!;
     }
 
-    public Task<List<OilDto>> GetOilsAsync()
+    private static AttributeValue? GetKeyAttributeValue<T>() where T : class
     {
-        throw new NotImplementedException();
+        AttributeValue? attrValue = null;
+        var t = typeof(T);
+        if (t.IsAssignableTo(typeof(IssueDto)))
+        {
+            attrValue = new AttributeValue("ISSUE#");
+        }
+        else if (t.IsAssignableTo(typeof(OilDto)))
+        {
+            attrValue = new AttributeValue("OIL#");
+        }
+
+        return attrValue;
     }
 
     public Task<List<OilUsageDto>> GetOilByIssue(UsageType type, string[] issues)
