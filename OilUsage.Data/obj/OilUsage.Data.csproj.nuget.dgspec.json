@@ -1,27 +1,25 @@
 {
   "format": 1,
   "restore": {
-    "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj": {}
+    "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj": {}
   },
   "projects": {
-    "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj": {
+    "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj",
+        "projectUniqueName": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj",
         "projectName": "OilUsage.Data",
-        "projectPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\OilUsage.Data.csproj",
-        "packagesPath": "C:\\Users\\ilaptiev\\.nuget\\packages\\",
-        "outputPath": "C:\\Projects\\Other\\OilUsage\\OilUsage.Data\\obj\\",
+        "projectPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/OilUsage.Data.csproj",
+        "packagesPath": "/Users/igorlaptiev/.nuget/packages/",
+        "outputPath": "/Users/igorlaptiev/Projects/OilUsage/OilUsage.Data/obj/",
         "projectStyle": "PackageReference",
         "configFilePaths": [
-          "C:\\Users\\ilaptiev\\AppData\\Roaming\\NuGet\\NuGet.Config",
-          "C:\\Program Files (x86)\\NuGet\\Config\\Microsoft.VisualStudio.Offline.config"
+          "/Users/igorlaptiev/.nuget/NuGet/NuGet.Config"
         ],
         "originalTargetFrameworks": [
           "net6.0"
         ],
         "sources": {
-          "C:\\Program Files (x86)\\Microsoft SDKs\\NuGetPackages\\": {},
           "https://api.nuget.org/v3/index.json": {}
         },
         "frameworks": {
@@ -64,7 +62,7 @@
               "privateAssets": "all"
             }
           },
-          "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\7.0.203\\RuntimeIdentifierGraph.json"
+          "runtimeIdentifierGraphPath": "/usr/local/share/dotnet/sdk/7.0.203/RuntimeIdentifierGraph.json"
         }
       }
     }

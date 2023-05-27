@@ -59,17 +59,17 @@ public class OilUsageDynamoDbService : IOilUsageService
             .ToList()!;
     }
 
-    private static AttributeValue? GetKeyAttributeValue<T>() where T : class
+    private static AttributeValue? GetKeyAttributeValue<T>(string value = "") where T : class
     {
         AttributeValue? attrValue = null;
         var t = typeof(T);
         if (t.IsAssignableTo(typeof(IssueDto)))
         {
-            attrValue = new AttributeValue("ISSUE#");
+            attrValue = new AttributeValue($"ISSUE#{value}");
         }
         else if (t.IsAssignableTo(typeof(OilDto)))
         {
-            attrValue = new AttributeValue("OIL#");
+            attrValue = new AttributeValue($"OIL#{value}");
         }
 
         return attrValue;
@@ -77,6 +77,43 @@ public class OilUsageDynamoDbService : IOilUsageService
 
     public Task<List<OilUsageDto>> GetOilByIssue(UsageType type, string[] issues)
     {
-        throw new NotImplementedException();
+        var issueKeys = issues.Select(i => GetKeyAttributeValue<IssueDto>(i)).ToList();
+
+    }
+
+    private async Task<List<T>> GetUsageQuery<T>(List<AttributeValue> keys) where T : class
+    {
+        var query = new QueryRequest()
+        {
+            TableName = _databaseSettings.Value.TableName,
+            KeyConditions = new Dictionary<string, Condition>()
+            {
+                {
+                    "PK",
+                    new Condition()
+                    {
+                        ComparisonOperator = ComparisonOperator.EQ,
+                        AttributeValueList = keys
+                    }
+                },
+                {
+                    "SK",
+                    new Condition()
+                    {
+                        ComparisonOperator = ComparisonOperator.BEGINS_WITH,
+                        AttributeValueList = new List<AttributeValue?>() { GetKeyAttributeValue<OilDto>() }
+                    }
+                }
+            },
+        };
+        var result = await _dbClient.QueryAsync(query);
+        return result.Items
+            .Select(issue =>
+            {
+                var issueSerialized = Document.FromAttributeMap(issue);
+                return JsonSerializer.Deserialize<T>(issueSerialized.ToJson());
+            })
+            .Where(dto => dto != null)
+            .ToList()!;
     }
 }
