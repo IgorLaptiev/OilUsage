@@ -3,12 +3,9 @@ namespace OilUsage.Domain.Models
 {
     public class OilDto
     {
-
-        public int OilId { get; set; }
+        public Guid OilGuid { get; set; }
 
         public string? Name { get; set; }
-
-
     }
 }
 

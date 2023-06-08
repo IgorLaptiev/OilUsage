@@ -4,6 +4,7 @@ using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using OilUsage.Domain;
+using OilUsage.Domain.Models;
 
 // For more information on enabling Web API for empty projects, visit https://go.microsoft.com/fwlink/?LinkID=397860
 
@@ -22,11 +23,9 @@ namespace OilUsage.API.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<IEnumerable<OilDto>> Get()
         {
-            return (await oilUsageService.GetOilsAsync())
-                .Where(o => !String.IsNullOrWhiteSpace(o.Name))
-                .Select(o => o.Name!).ToList();
+            return await oilUsageService.GetOilsAsync();
         }
 
         // GET api/values/5

@@ -4,8 +4,10 @@ using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
 using Amazon.DynamoDBv2.Model;
 using Microsoft.Extensions.Options;
+using OilUsage.Data.Entity;
 using OilUsage.Domain.Models;
 using OilUsage.Domain.Settings;
+using UsageType = OilUsage.Domain.Models.UsageType;
 
 namespace OilUsage.Domain;
 
@@ -59,9 +61,9 @@ public class OilUsageDynamoDbService : IOilUsageService
             .ToList()!;
     }
 
-    private static AttributeValue? GetKeyAttributeValue<T>(string value = "") where T : class
+    private static AttributeValue GetKeyAttributeValue<T>(string value = "") where T : class
     {
-        AttributeValue? attrValue = null;
+        AttributeValue attrValue = new AttributeValue();
         var t = typeof(T);
         if (t.IsAssignableTo(typeof(IssueDto)))
         {
@@ -75,10 +77,21 @@ public class OilUsageDynamoDbService : IOilUsageService
         return attrValue;
     }
 
-    public Task<List<OilUsageDto>> GetOilByIssue(UsageType type, string[] issues)
+    public async Task<List<OilUsageDto>> GetOilByIssue(UsageType type, string[] issueIds)
     {
-        var issueKeys = issues.Select(i => GetKeyAttributeValue<IssueDto>(i)).ToList();
-
+        var issueKeys = issueIds.Select(GetKeyAttributeValue<IssueDto>).ToList();
+        var usages = await GetUsageQuery<Usage>(issueKeys);
+        return usages.GroupBy(usage => usage.Oil)
+            .Select(group =>
+                new OilUsageDto
+                {
+                    Name = group.Key!.Name,
+                    OilGuid = group.Key!.OilGuid!.Value,
+                    Usage = type.ToString(),
+                    Issues = group.Select(i => i!.Issue!.Name!)
+                })
+            .OrderByDescending(u => u.Issues!.Count())
+            .ToList();
     }
 
     private async Task<List<T>> GetUsageQuery<T>(List<AttributeValue> keys) where T : class

@@ -30,7 +30,7 @@ namespace OilUsage.Domain
             return await _oilDbContext.Oils.Select(o => new OilDto
             {
                 Name = o.Name,
-                OilId = o.OilId
+                OilGuid = o.OilGuid!.Value
             }).ToListAsync();
         }
 
@@ -50,7 +50,7 @@ namespace OilUsage.Domain
                                  new OilUsageDto
                                  {
                                      Name = group.Key!.Name,
-                                     OilId = group.Key!.OilId,
+                                     OilGuid = group.Key!.OilGuid!.Value,
                                      Usage = type.ToString(),
                                      Issues = group.Select(i => i!.Issue!.Name!)
                                  })

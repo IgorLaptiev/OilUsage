@@ -3,7 +3,7 @@
     public class OilUsageDto
     {
 
-        public int OilId { get; set; }
+        public Guid OilGuid { get; set; }
 
         public string? Usage { get; set; }
 

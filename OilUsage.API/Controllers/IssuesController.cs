@@ -18,11 +18,9 @@ namespace OilUsage.API.Controllers
 
         // GET: api/values
         [HttpGet]
-        public async Task<IEnumerable<string>> Get()
+        public async Task<IEnumerable<IssueDto>> Get()
         {
-            return (await oilUsageService.GetIssuesAsync())
-                .Where(o => !String.IsNullOrWhiteSpace(o.Name))
-                .Select(o => o.Name!).ToList();
+            return await oilUsageService.GetIssuesAsync();
         }
 
         
