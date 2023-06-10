@@ -11,7 +11,7 @@ var table = "OilUsage";
 var context = new OildbContext();
 //var credentials = new BasicAWSCredentials(accessKey, secretKey);
 var dynamoDb = new AmazonDynamoDBClient();
-
+/*
 context.Oils.ToList().ForEach(async oil =>
 {
     var ojson = JsonSerializer.Serialize(oil);
@@ -39,10 +39,11 @@ context.Issues.ToList().ForEach(async issue =>
     await dynamoDb.PutItemAsync(createRequest);
     //Console.WriteLine($"{issue.Name} - {issue.IssueGuid}");
 });
-
+*/
 context.Usages
     .Include(u => u.Issue)
     .Include(u => u.Oil)
+    .Include(u => u.UsageType)
     .ToList()
     .ForEach(async usage =>
 {
@@ -55,7 +56,7 @@ context.Usages
     };
 
     await dynamoDb.PutItemAsync(createRequest);
-    //Console.WriteLine($"{issue.Name} - {issue.IssueGuid}");
+    //Console.WriteLine($"{issue.Name} - {issue.IssueGuid}"); 
 });
 Console.ReadLine();
 

@@ -1,4 +1,5 @@
 using System.Diagnostics;
+using System.Linq;
 using System.Text.Json;
 using Amazon.DynamoDBv2;
 using Amazon.DynamoDBv2.DocumentModel;
@@ -81,7 +82,9 @@ public class OilUsageDynamoDbService : IOilUsageService
     {
         var issueKeys = issueIds.Select(GetKeyAttributeValue<IssueDto>).ToList();
         var usages = await GetUsageQuery<Usage>(issueKeys);
-        return usages.GroupBy(usage => usage.Oil)
+        return usages
+            .Where(usage => usage!.UsageType!.UsageTypeId == (int)type)
+            .GroupBy(usage => usage.Oil)
             .Select(group =>
                 new OilUsageDto
                 {

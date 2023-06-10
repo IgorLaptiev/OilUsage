@@ -8,7 +8,7 @@ public partial class Usage
 {
     public string PK => $"ISSUE#{Issue!.IssueGuid}";
 
-    public string SK => $"OIL#{Oil!.OilGuid}TYPE#{UsageType}";
+    public string SK => $"OIL#{Oil!.OilGuid}";
 
     [JsonIgnore]
     public int UsageId { get; set; }
