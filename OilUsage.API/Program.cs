@@ -6,13 +6,11 @@ using Amazon.Lambda;
 using OilUsage.Domain.Settings;
 
 var builder = WebApplication.CreateBuilder(args);
-
+builder.Logging.AddLambdaLogger(new LambdaLoggerOptions(builder.Configuration));
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(DatabaseSettings.KeyName));
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 // Add services to the container.
-//builder.Services.AddSingleton<IAmazonDynamoDB>(_=> builder.Configuration.GetAWSOptions().CreateServiceClient<IAmazonDynamoDB>());
 builder.Services.AddAWSService<IAmazonDynamoDB>();
-//new AmazonDynamoDBClient(RegionEndpoint.USEast1)));
 builder.Services.AddDbContext<OildbContext>();
 builder.Services.AddTransient<IOilUsageService, OilUsageDynamoDbService>();
 builder.Services.AddControllers();
