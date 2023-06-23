@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
+using OilUsage.API.Authorization;
 using OilUsage.Domain;
 using OilUsage.Domain.Models;
 
@@ -12,6 +13,7 @@ namespace OilUsage.API.Controllers
 {
 
     [Route("api/[controller]")]
+    [ApiKey]
     public class OilsController : Controller
     {
         private readonly IOilUsageService oilUsageService;

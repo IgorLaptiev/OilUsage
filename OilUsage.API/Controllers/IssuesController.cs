@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using OilUsage.API.Authorization;
 using OilUsage.Domain;
 using OilUsage.Domain.Models;
 
@@ -7,6 +8,7 @@ using OilUsage.Domain.Models;
 namespace OilUsage.API.Controllers
 {
     [Route("api/[controller]")]
+    [ApiKey]
     public class IssuesController : Controller
     {
         private readonly IOilUsageService oilUsageService;
