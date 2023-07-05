@@ -11,6 +11,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.Domain", "OilUsage
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.Migrate", "OilUsage.Migrate\OilUsage.Migrate.csproj", "{08E6C6D3-610B-4A75-B463-C9D12BCE86AB}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.Bot", "OilUsage.Bot\OilUsage.Bot.csproj", "{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -33,6 +35,10 @@ Global
 		{08E6C6D3-610B-4A75-B463-C9D12BCE86AB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{08E6C6D3-610B-4A75-B463-C9D12BCE86AB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{08E6C6D3-610B-4A75-B463-C9D12BCE86AB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

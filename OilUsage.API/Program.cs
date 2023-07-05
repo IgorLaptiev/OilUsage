@@ -25,6 +25,7 @@ builder.Configuration
         });
 
 builder.Logging.AddLambdaLogger(new LambdaLoggerOptions(builder.Configuration));
+builder.Services.AddHealthChecks();
 builder.Services.Configure<DatabaseSettings>(builder.Configuration.GetSection(DatabaseSettings.KeyName));
 builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection(ApiSettings.KeyName));
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
@@ -74,7 +75,7 @@ if (app.Environment.IsDevelopment())
     app.UseSwagger();
     app.UseSwaggerUI();
 }
-
+app.MapHealthChecks("/healthcheck");
 app.UseHttpsRedirection();
 
 app.UseAuthorization();
