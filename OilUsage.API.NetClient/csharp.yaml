@@ -1,0 +1,9 @@
+packageName: "OilUsage.API.NetClient"
+packageTitle: "OilUsage.API Client .Net"
+packageDescription: "OilUsage.API Client .Net"
+serviceUrl: https://localhost:7295/swagger/v1/swagger.json
+optionalAssemblyInfo: false
+packageGuid: 98B0A40E-F557-4C22-B7A7-787690EF901D
+language: CSharp
+apiTests: false
+modelTests: false

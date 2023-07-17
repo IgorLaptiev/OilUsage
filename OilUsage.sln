@@ -13,6 +13,10 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.Migrate", "OilUsag
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.Bot", "OilUsage.Bot\OilUsage.Bot.csproj", "{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OilUsage.API.NetClient", "OilUsage.API.NetClient\src\OilUsage.API.NetClient\OilUsage.API.NetClient.csproj", "{12AF57AE-B525-42BE-86CA-9D8E7E3D36D8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TestConsole", "TestConsole\TestConsole.csproj", "{DC63E107-C837-4606-B5D6-CC11E0686971}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -39,6 +43,14 @@ Global
 		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{AFF8D71A-65F6-4E0A-B4B5-602AF05C1F07}.Release|Any CPU.Build.0 = Release|Any CPU
+		{12AF57AE-B525-42BE-86CA-9D8E7E3D36D8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{12AF57AE-B525-42BE-86CA-9D8E7E3D36D8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{12AF57AE-B525-42BE-86CA-9D8E7E3D36D8}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{12AF57AE-B525-42BE-86CA-9D8E7E3D36D8}.Release|Any CPU.Build.0 = Release|Any CPU
+		{DC63E107-C837-4606-B5D6-CC11E0686971}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{DC63E107-C837-4606-B5D6-CC11E0686971}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{DC63E107-C837-4606-B5D6-CC11E0686971}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{DC63E107-C837-4606-B5D6-CC11E0686971}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
