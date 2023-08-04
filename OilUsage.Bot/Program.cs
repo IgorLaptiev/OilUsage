@@ -1,4 +1,5 @@
 using Amazon;
+using OilUsage.Bot.Commands;
 using OilUsage.Bot.Configuration;
 using OilUsage.Bot.Services;
 using Telegram.Bot;
@@ -33,7 +34,7 @@ builder.Services.AddHttpClient("telegram_bot_client")
         TelegramBotClientOptions options = new(botConfig.BotToken);
         return new TelegramBotClient(options, httpClient);
     });
-
+builder.Services.RegisterCommands();
 builder.Services.AddControllers()
     .AddNewtonsoftJson();
 

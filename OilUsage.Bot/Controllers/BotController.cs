@@ -1,7 +1,9 @@
 using Microsoft.AspNetCore.Mvc;
+using OilUsage.Bot.Commands;
 using Telegram.Bot;
 using Telegram.Bot.Types;
 using Telegram.Bot.Types.Enums;
+using Telegram.Bot.Types.ReplyMarkups;
 
 namespace OilUsage.Bot.Controllers;
 
@@ -9,23 +11,85 @@ namespace OilUsage.Bot.Controllers;
 [Route("[controller]")]
 public class BotController : ControllerBase
 {
+    private const string CheckMark = "✔ ";
     private readonly ITelegramBotClient _botClient;
+    private readonly CommandsManager _commandsManager;
     private readonly ILogger<BotController> _logger;
 
-    public BotController(ITelegramBotClient botClient, ILogger<BotController> logger)
+    public BotController(ITelegramBotClient botClient, CommandsManager commandsManager, ILogger<BotController> logger)
     {
         _botClient = botClient;
+        _commandsManager = commandsManager;
         _logger = logger;
     }
 
     [HttpPost("[action]")]
     public async Task<IActionResult> Update([FromBody] Update update, CancellationToken cancellationToken)
     {
-        await _botClient.SendTextMessageAsync(
-            chatId: update.Message!.Chat.Id,
-            text: $"Received {update.Message.Text}",
-            cancellationToken: cancellationToken);
+        var handler = update switch
+        {
+            { Message: { } message } => BotMessageReceived(message, cancellationToken),
+            { CallbackQuery: { } callbackQuery } => BotOnCallbackQueryReceived(callbackQuery, cancellationToken),
+            { }
+            _ => UnknownUpdate(update)
+        };
+        
+        await handler;
         return Ok();
+    }
+
+    private async Task BotOnCallbackQueryReceived(CallbackQuery callbackQuery, CancellationToken cancellationToken)
+    {
+        _logger.LogInformation("Received inline keyboard callback from: {CallbackQueryId}", callbackQuery.Id);
+
+        foreach (var row in callbackQuery.Message.ReplyMarkup.InlineKeyboard)
+        {
+            foreach (var item in row)
+            {
+                if (item.CallbackData == callbackQuery.Data)
+                {
+                    if (item.Text.StartsWith(CheckMark))
+                    {
+                        item.Text = item.Text.Substring(CheckMark.Length);
+                        await _botClient.AnswerCallbackQueryAsync(
+                            callbackQueryId: callbackQuery.Id,
+                            text: $"Исключено {item.Text}",
+                            cancellationToken: cancellationToken);
+                    }
+                    else
+                    {
+                        await _botClient.AnswerCallbackQueryAsync(
+                            callbackQueryId: callbackQuery.Id,
+                            text: $"Выбрано {item.Text}",
+                            cancellationToken: cancellationToken);
+                        item.Text = $"{CheckMark}{item.Text}";
+                    }
+                }
+            }
+        }
+
+        await _botClient.EditMessageReplyMarkupAsync(
+            chatId: callbackQuery.Message!.Chat.Id,
+            messageId: callbackQuery.Message!.MessageId,
+            replyMarkup: callbackQuery.Message!.ReplyMarkup,
+            cancellationToken: cancellationToken);
+    }
+
+    private Task UnknownUpdate(Update update)
+    {
+        _logger.LogInformation("Unknown update type: {UpdateType}", update.Type);
+        return Task.CompletedTask;
+    }
+
+    private async Task BotMessageReceived(Message message, CancellationToken cancellationToken)
+    {
+        if (!await _commandsManager.ExecuteAsync(message, cancellationToken))
+        {
+            await _botClient.SendTextMessageAsync(
+                chatId: message!.Chat.Id,
+                text: $"Received {message.Text}",
+                cancellationToken: cancellationToken);
+        }
     }
 
     [HttpGet("[action]")]
