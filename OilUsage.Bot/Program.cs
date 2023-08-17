@@ -22,6 +22,7 @@ builder.Logging.AddLambdaLogger(new LambdaLoggerOptions(builder.Configuration));
 // Add services to the container.
 builder.Services.AddAWSLambdaHosting(LambdaEventSource.HttpApi);
 builder.Services.AddHealthChecks();
+builder.Services.Configure<ApiSettings>(builder.Configuration.GetSection(ApiSettings.KeyName)); 
 var botConfigurationSection = builder.Configuration.GetSection(BotConfiguration.KeyName);
 builder.Services.Configure<BotConfiguration>(botConfigurationSection);
 
@@ -38,7 +39,15 @@ builder.Services.RegisterCommands();
 builder.Services.AddControllers()
     .AddNewtonsoftJson();
 
-builder.Services.AddHostedService<ConfigureWebhook>();
+if (builder.Environment.IsDevelopment())
+{
+    builder.Services.AddTransient<ConfigureWebhook>();
+    builder.Services.AddHostedService<TunnelService>();
+}
+else
+{
+    builder.Services.AddHostedService<ConfigureWebhook>();
+}
 
 var app = builder.Build();
 app.MapHealthChecks("/healthcheck");

@@ -13,10 +13,10 @@ public class BotController : ControllerBase
 {
     private const string CheckMark = "✔ ";
     private readonly ITelegramBotClient _botClient;
-    private readonly CommandsManager _commandsManager;
+    private readonly ICommandsManager _commandsManager;
     private readonly ILogger<BotController> _logger;
 
-    public BotController(ITelegramBotClient botClient, CommandsManager commandsManager, ILogger<BotController> logger)
+    public BotController(ITelegramBotClient botClient, ICommandsManager commandsManager, ILogger<BotController> logger)
     {
         _botClient = botClient;
         _commandsManager = commandsManager;
@@ -42,37 +42,52 @@ public class BotController : ControllerBase
     {
         _logger.LogInformation("Received inline keyboard callback from: {CallbackQueryId}", callbackQuery.Id);
 
-        foreach (var row in callbackQuery.Message.ReplyMarkup.InlineKeyboard)
+        var button = FindButton(callbackQuery);
+        if (button != null)
+        {
+            await SwitchButton(callbackQuery.Id, button, cancellationToken);
+            await _botClient.EditMessageReplyMarkupAsync(
+                chatId: callbackQuery.Message!.Chat.Id,
+                messageId: callbackQuery.Message!.MessageId,
+                replyMarkup: callbackQuery.Message!.ReplyMarkup,
+                cancellationToken: cancellationToken);
+        }
+    }
+
+    private InlineKeyboardButton? FindButton(CallbackQuery callbackQuery)
+    {
+        foreach (var row in callbackQuery.Message!.ReplyMarkup?.InlineKeyboard ?? new List<IEnumerable<InlineKeyboardButton>>())
         {
             foreach (var item in row)
             {
                 if (item.CallbackData == callbackQuery.Data)
                 {
-                    if (item.Text.StartsWith(CheckMark))
-                    {
-                        item.Text = item.Text.Substring(CheckMark.Length);
-                        await _botClient.AnswerCallbackQueryAsync(
-                            callbackQueryId: callbackQuery.Id,
-                            text: $"Исключено {item.Text}",
-                            cancellationToken: cancellationToken);
-                    }
-                    else
-                    {
-                        await _botClient.AnswerCallbackQueryAsync(
-                            callbackQueryId: callbackQuery.Id,
-                            text: $"Выбрано {item.Text}",
-                            cancellationToken: cancellationToken);
-                        item.Text = $"{CheckMark}{item.Text}";
-                    }
+                    return item;
                 }
             }
         }
 
-        await _botClient.EditMessageReplyMarkupAsync(
-            chatId: callbackQuery.Message!.Chat.Id,
-            messageId: callbackQuery.Message!.MessageId,
-            replyMarkup: callbackQuery.Message!.ReplyMarkup,
-            cancellationToken: cancellationToken);
+        return null;
+    }
+
+    private async Task SwitchButton(string id, InlineKeyboardButton item, CancellationToken cancellationToken)
+    {
+        if (item.Text.StartsWith(CheckMark))
+        {
+            item.Text = item.Text.Substring(CheckMark.Length);
+            await _botClient.AnswerCallbackQueryAsync(
+                callbackQueryId: id,
+                text: $"Исключено {item.Text}",
+                cancellationToken: cancellationToken);
+        }
+        else
+        {
+            await _botClient.AnswerCallbackQueryAsync(
+                callbackQueryId: id,
+                text: $"Выбрано {item.Text}",
+                cancellationToken: cancellationToken);
+            item.Text = $"{CheckMark}{item.Text}";
+        }
     }
 
     private Task UnknownUpdate(Update update)

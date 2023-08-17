@@ -3,12 +3,12 @@ using Telegram.Bot.Types;
 
 namespace OilUsage.Bot.Commands;
 
-public class CommandsManager
+public class CommandsManager : ICommandsManager
 {
     private readonly ITelegramBotClient _client;
     private const string CommandPrefix = "/";
     
-    private Dictionary<string, ICommandHandler> _commandHandlers;
+    private readonly Dictionary<string, ICommandHandler> _commandHandlers;
 
     public CommandsManager(ITelegramBotClient client, IEnumerable<ICommandHandler> handlers)
     {
@@ -27,5 +27,15 @@ public class CommandsManager
             }
         }
         return false;
+    }
+
+    public IEnumerable<BotCommand> GetCommands()
+    {
+        return _commandHandlers.Select(commandHandler =>
+            new BotCommand
+            {
+                Command = commandHandler.Value.Command,
+                Description = commandHandler.Value.Description
+            });
     }
 }
